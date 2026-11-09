@@ -1,0 +1,131 @@
+<?php
+
+function paginaError($mensaje)
+{
+  header("HTTP/1.0 404 $mensaje");
+  inicioCabecera("PRACTICA");
+  finCabecera();
+  inicioCuerpo("ERROR");
+  echo "<br />\n";
+  echo $mensaje;
+  echo "<br />\n";
+  echo "<br />\n";  echo "<br />\n";
+  echo "<a href='/index.php'>Ir a la pagina principal</a>\n";
+  
+  finCuerpo();  
+}
+
+function inicioCabecera($titulo)
+{
+?>
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+
+        <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+        Remove this if you use the .htaccess -->
+            <meta http-equiv="X-UA-Compatible"  content="IE=edge,chrome=1">
+
+        <title><?php echo $titulo ?></title>
+        <meta name="description" content="">
+        <meta name="author" content="Administrador">
+
+        <meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+        <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+        <link rel="shortcut icon" href="/favicon.ico">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        
+        <link rel="stylesheet" type="text/css" href="/estilos/base.css">
+<?php
+}
+
+function finCabecera()
+{
+?>
+    </head>
+<?php   
+}
+
+function inicioCuerpo(string $cabecera, array $ubicacion=[])
+{
+    global $acceso;
+
+?>
+    <body>
+        <div id="documento">
+        
+            <header>
+                <span id="logo"><a href="/"><img src="/imagenes/logo.png"></a></span>
+                <span id="titulo"><?php echo $cabecera;?></span>
+            </header>
+            
+            <div id="barraLogin">
+                
+            </div>
+            <nav class="barraMenu">
+                <ul>
+                    <li><a href="/aplicacion/pruebas/index.php">A rellenar</a></li>
+                 </ul> 
+                
+            </nav>
+            <div id="barraUbicacion">
+                <?php
+                if($ubicacion)
+                {
+                    
+                    foreach ($ubicacion as $elem) 
+                    {
+                        if(isset($elem["ENLACE"]))
+                        {
+                            echo "<a &nbsp;&nbsp; href='{$elem["ENLACE"]}' >";
+                            
+                        } 
+                        
+                        echo $elem["TEXTO"];
+
+                        if(isset($elem["ENLACE"]))
+                        {
+                            echo "</a>";
+                        }
+
+                        if(isset($elem["ADICIONAL"]))
+                            echo $elem["ADICIONAL"];
+                        else
+                            echo "&nbsp;&nbsp;";
+                    }
+                }
+
+                ?>
+            </div>
+
+            <div id="principal">
+<?php   
+}
+
+function finCuerpo()
+{
+?>
+                <br />
+                <br />
+            </div>
+            <footer>
+                <hr width="90%"  />  
+                <div>
+                    &copy; Copyright by Juange
+                    <?php
+                    echo " - " . date("d/m/Y H:i:s"); 
+                    ?>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>
+<?php
+}
+
+// Barra de navegación
+function historial() {
+    echo $_SERVER['HTTP_REFERER'];
+}

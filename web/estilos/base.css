@@ -1,0 +1,274 @@
+@charset "UTF8";
+
+/* Variables globales para paleta de colores y estilo Moderno */
+:root {
+    --font-apple: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --bg-body: #e5e5ea; /* Gris clásico de fondos en iOS/macOS */
+    --bg-card: #ffffff;
+    --text-main: #1d1d1f;
+    --text-muted: #86868b;
+    --blue-primary: #0071e3;
+    --blue-hover: #0077ed;
+    --border-soft: #d2d2d7;
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
+    --radius-lg: 18px;
+    --radius-sm: 8px;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: var(--font-apple);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    -webkit-font-smoothing: antialiased;
+}
+
+/**** id's ****/
+#documento {
+    background-color: var(--bg-card);
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    overflow: hidden; /* Para respetar los bordes redondeados */
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 30px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--border-soft);
+}
+
+header #logo img {
+    height: 44px;
+    width: auto;
+    margin-right: 16px;
+    border-radius: var(--radius-sm);
+}
+
+#titulo, header #titulo {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-style: normal;
+    color: var(--text-main);
+    margin: 0;
+}
+
+#barraLogin {
+    padding: 0;
+}
+
+/**** clases de Navegación ****/
+.barraMenu {
+    text-align: center;
+    padding: 12px 20px;
+    background-color: var(--bg-card);
+}
+
+.barraMenu ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.barraMenu ul li {
+    list-style: none;
+    color: var(--border-soft); /* Oculta sutilmente los guiones separadores */
+}
+
+.barraMenu ul li a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 14px;
+    font-weight: 400;
+    padding: 6px 14px;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+}
+
+.barraMenu ul li a:hover {
+    background-color: var(--bg-body);
+    color: var(--blue-primary);
+    border-bottom: none;
+}
+
+#barraUbicacion {
+    background-color: var(--bg-body);
+    color: var(--text-muted);
+    font-size: 12px;
+    padding: 10px 30px;
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+}
+
+#barraUbicacion a {
+    color: var(--blue-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#barraUbicacion a:hover {
+    text-decoration: underline;
+}
+
+#principal {
+    padding: 40px 30px;
+    flex-grow: 1;
+}
+
+/**** Botones estilo iOS ****/
+.boton {
+    background-color: var(--blue-primary);
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.boton a, .boton a:visited {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.boton:hover, .boton a:hover {
+    background-color: var(--blue-hover);
+    color: #ffffff;
+}
+
+.boton:active {
+    transform: scale(0.97);
+}
+
+/**** Tablas modernas ****/
+.tabla {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.tabla th {
+    background-color: var(--bg-body);
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.tabla td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 14px;
+}
+
+.tabla tr:last-child td {
+    border-bottom: none;
+}
+
+.tabla tr.par {
+    background-color: #ffffff;
+    color: var(--text-main);
+}
+
+.tabla tr.impar {
+    background-color: #fafafa;
+    color: var(--text-main);
+}
+
+/**** Formularios y Errores ****/
+.for_texto {
+    border: 1px solid var(--border-soft);
+    background-color: var(--bg-body);
+    padding: 10px 14px;
+    margin: 4px 0;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--text-main);
+    transition: all 0.2s ease;
+    outline: none;
+    width: calc(100% - 30px);
+    max-width: 300px;
+}
+
+.for_texto:focus {
+    background-color: #ffffff;
+    border-color: var(--blue-primary);
+    box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.2);
+}
+
+.error {
+    background-color: #fce4e4;
+    color: #cc0000;
+    border: 1px solid #fcc9c9;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 500;
+    margin: 15px 0;
+    display: inline-block;
+}
+
+/**** Pie de página ****/
+footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--text-muted);
+    background-color: var(--bg-body);
+    font-size: 12px;
+    border-top: 1px solid var(--border-soft);
+}
+
+footer hr {
+    display: none; /* Se oculta para un diseño más limpio */
+}
+
+footer div {
+    padding: 0;
+}
+
+/**** Selectores antiguos (por si se utilizan en otras vistas) ****/
+#cabecera {
+    background-color: var(--bg-body);
+    padding: 10px;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+#pie {
+    background-color: var(--bg-body);
+    color: var(--text-muted);
+    padding: 10px;
+    text-align: center;
+}
