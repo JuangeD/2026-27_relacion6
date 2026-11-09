@@ -36,5 +36,3 @@ function cuerpo()
 <?php
 }
 
-// Comentario en la rama dev
-// Otro comentario en la rama dev
