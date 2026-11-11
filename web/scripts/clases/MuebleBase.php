@@ -32,15 +32,24 @@ abstract class MuebleBase
             if(!$validoNombre)
                 throw new Exception("Nombre: 40 caracteres máximo y no debe estar vacío");
 
-            $validoFechaIniVenta = $this->setFechaIniVenta($fechaIniVenta);
-            if(!$validoFechaIniVenta)
+            if(!$this->setFabricante($fabricante))
+                $this->_fabricante="FaMu:";
+
+            if(!$this->setPais($pais))
+                $this->_pais="ESPAÑA";
+
+            if(!$this->setAnio($anio))
+                $this->_anio=2020;
+
+            if(!$this->setFechaIniVenta($fechaIniVenta))
                 $this->_fechaIniVenta="01/01/".$this->getAnio();
 
-            $this->setFabricante($fabricante);
-            $this->setPais($pais);
-            $this->setAnio($anio);
-            $this->setFechaFinVenta($fechaFinVenta);
-            $this->setPrecio($precio);
+            if(!$this->setFechaFinVenta($fechaFinVenta))
+                $this->_fechaFinVenta="31/12/2040";
+
+            if(!$this->setPrecio($precio))
+                $this->_precio=30;
+            
         }
         else
             throw new Exception("Error: límite de creación de muebles alcanzado");
