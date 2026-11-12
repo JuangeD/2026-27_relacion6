@@ -15,21 +15,21 @@ abstract class MuebleBase
     private string $_fabricante="FaMu:";
     private string $_pais="ESPAÑA";
     private int $_anio=2020;
-    private string $_fechaIniVenta;
+    private string $_fechaIniVenta="01/01/2020";
     private string $_fechaFinVenta="31/12/2040";
     private float $_precio=30;
+    private Caracteristicas $_caracteristicas;
 
     /* ====== CONSTRUCTOR ====== */
     /**
      * Constructor de la clase MuebleBase
      * 
      */
-    public function __construct(string $nombre,  string $fechaIniVenta, string $fabricante="FaMu:", string $pais="ESPAÑA", int $anio=2020, string $fechaFinVenta="31/12/2040", float $precio=30)
+    public function __construct(string $nombre, string $fabricante="FaMu:", string $pais="ESPAÑA", int $anio=2020,  string $fechaIniVenta="01/01/2020", string $fechaFinVenta="31/12/2040", float $precio=30)
     {
         if(MuebleBase::MAXIMO_CLASE>MuebleBase::$_mueblesCreados)
         {
-            $validoNombre = $this->setNombre($nombre);
-            if(!$validoNombre)
+            if(!$this->setNombre($nombre))
                 throw new Exception("Nombre: 40 caracteres máximo y no debe estar vacío");
 
             if(!$this->setFabricante($fabricante))
@@ -50,6 +50,7 @@ abstract class MuebleBase
             if(!$this->setPrecio($precio))
                 $this->_precio=30;
             
+            MuebleBase::$_mueblesCreados++;
         }
         else
             throw new Exception("Error: límite de creación de muebles alcanzado");
@@ -151,9 +152,10 @@ abstract class MuebleBase
     public function setFechaIniVenta(string $var): bool
     {
         $res = false;
+        $fecha = DateTime::createFromFormat("d/m/Y", $var);
 
         if(validaFecha($var, DateTime::createFromFormat("d/m/Y", "01/01/$this->_anio")->format("d/m/Y")) 
-            && (DateTime::createFromFormat("d/m/Y", $var)>DateTime::createFromFormat("d/m/Y", "01/01/$this->_anio")))
+            && ($fecha > DateTime::createFromFormat("d/m/Y", "01/01/$this->_anio")))
         {
             $this->_fechaIniVenta = $var;
             $res = true;
@@ -200,6 +202,16 @@ abstract class MuebleBase
         throw new Exception("No se permite acceder a la propiedad dinámica $name");
     }
 
+    public function __isset($name): Exception
+    {
+        throw new Exception('Not implemented');
+    }
+
+    public function __unset($name): Exception
+    {
+        throw new Exception('Not implemented');
+    }
+    
     /* ====== MÉTODOS ABSTRACTOS ====== */
     /**
      * Método abstracto redefinido en clases hijas que devuelve
@@ -221,6 +233,14 @@ abstract class MuebleBase
             $puedeCrear = false;
 
         return $puedeCrear;
+    }
+
+    public function anadirCaracteristicas(string $c1, mixed $v1, string $c2, mixed $v2, ...$propiedades)
+    {
+        $this->_caracteristicas->__set($c1, $v1);
+        $this->_caracteristicas->__set($c2, $v2);
+
+        
     }
 
     public function __toString(): string
