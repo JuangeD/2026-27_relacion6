@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\type;
-
 /**
  * Clase abstracta MuebleBase que almacenará los datos
  * de un mueble base
@@ -237,16 +235,15 @@ abstract class MuebleBase
         return $puedeCrear;
     }
 
-    public function anadirCaracteristicas(string $c1, mixed $v1, string $c2, mixed $v2, mixed ...$propiedades)
+    public function anadirCaracteristicas(string $c1, mixed $v1, mixed ...$propiedades)
     {
         $this->_caracteristicas->__set($c1, $v1);
-        $this->_caracteristicas->__set($c2, $v2);
 
         if(count($propiedades)>=2)
         {
             for($i=0; $i<count($propiedades); $i+=2)
             {
-                if(is_string($propiedades[$i]))
+                if(isset($propiedades[$i+1]) && is_string($propiedades[$i]))
                     $this->_caracteristicas->__set($propiedades[$i], $propiedades[$i+1]);
             }
         }

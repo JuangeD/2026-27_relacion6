@@ -25,6 +25,16 @@ class Caracteristicas implements Iterator
         $this->_propiedades[$nombre] = $valor;
     }
 
+    public function __isset(string $nombre): bool
+    {
+        return isset($this->_propiedades[$nombre]);
+    }
+
+    public function __unset(string $nombre): void
+    {
+        unset($this->_propiedades[$nombre]);
+    }
+
     /* ====== MÉTODOS ITERATOR ====== */
     #[Override]
     public function rewind(): void
